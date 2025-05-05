@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingIndicator = document.getElementById('loadingIndicator'); 
   const clearDataButton = document.getElementById('clearDataButton');
 
+  // Delay in milliseconds before showing the loading indicator to improve user experience.
+  // This value can be adjusted if needed for performance tuning.
+  const LOADING_DELAY_MS = 50; 
+  const MAX_DISPLAYED_SITES = 10; // Maximum number of sites to display
+
   // --- Function to show/hide loading indicator ---
   function showLoading(isLoading) {
       if (isLoading) {
@@ -79,6 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
           // Sort by count descending
           filteredSites.sort((a, b) => b.count - a.count);
 
+          // --- Limit to top 10 --- 
+          const top10Sites = filteredSites.slice(0, MAX_DISPLAYED_SITES);
+
           // --- Display the results --- 
           showLoading(false); // Hide loading indicator before showing results
           statsList.innerHTML = ''; // Clear list
@@ -87,15 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
           if (sitesInPeriod.length === 0) {
               // Case 1: No visits recorded for the selected time period at all
               statsList.innerHTML = '<li>No visits recorded for this time period.</li>';
-          } else if (filteredSites.length === 0) {
+          } else if (top10Sites.length === 0) { // Check top10Sites length now
               // Case 2: Visits exist for the period, but none match the domain filter
               statsList.innerHTML = '<li>No sites match the domain filter for this period.</li>';
           } else {
-              // Case 3: Display the filtered sites
-              filteredSites.forEach(site => {
+              // Case 3: Display the filtered and limited sites
+              top10Sites.forEach(site => { // Iterate over top10Sites
                 const listItem = document.createElement('li');
-                const domainSpan = document.createElement('span');
-                domainSpan.textContent = site.domain;
+                
+                // Create an anchor tag for the domain
+                const domainLink = document.createElement('a');
+                domainLink.href = `https://${site.domain}`; // Assume HTTPS
+                domainLink.textContent = site.domain;
+                domainLink.target = '_blank'; // Open in new tab
+                domainLink.title = `Open https://${site.domain} in a new tab`; // Tooltip
+                domainLink.rel = 'noopener noreferrer'; // Prevent window.opener vulnerabilities
                 
                 const percentageSpan = document.createElement('span');
                 let percentage = 0;
@@ -106,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Display count and percentage
                 percentageSpan.textContent = `${site.count} (${percentage}%)`; 
 
-                listItem.appendChild(domainSpan);
+                listItem.appendChild(domainLink); // Add the link instead of the span
                 listItem.appendChild(percentageSpan);
                 statsList.appendChild(listItem);
               });
@@ -114,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // --- End Corrected Empty State Handling ---
 
         });
-    }, 50); // Small delay
+    }, LOADING_DELAY_MS); // Small delay
 
   }
 
