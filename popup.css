@@ -1,0 +1,123 @@
+/* popup.css */
+:root {
+  --primary-color: #4a90e2;
+  --border-color: #ddd;
+  --background-color: #f9f9f9;
+  --text-color: #333;
+  --button-hover-bg: #357abd;
+  --danger-color: #d9534f;
+  --danger-hover-bg: #c9302c;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  width: 380px; /* Slightly wider */
+  padding: 15px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.3em;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.filters {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+}
+
+.filters label {
+  margin-right: 5px;
+  font-size: 0.9em;
+}
+
+.filters select,
+.filters input[type="text"] {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  flex-grow: 1;
+  font-size: 0.9em;
+}
+
+#statsContainer {
+  margin-top: 15px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  min-height: 100px; /* Ensure container has some height even when empty */
+  position: relative; /* For loading indicator positioning */
+}
+
+.loading {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-style: italic;
+    color: #888;
+}
+
+.loading.visible {
+    display: block; /* Show when loading */
+}
+
+#statsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 280px; /* Adjusted max-height */
+  overflow-y: auto;
+  /* Removed border, handled by container */
+}
+
+#statsList li {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95em;
+  display: flex; /* For potential future additions like favicons */
+  justify-content: space-between; /* Pushes count to the right */
+  align-items: center;
+}
+
+#statsList li:last-child {
+  border-bottom: none;
+}
+
+#statsList li:empty {
+    padding: 20px; /* More padding for empty messages */
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+.actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#clearDataButton {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: white;
+    background-color: var(--danger-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#clearDataButton:hover {
+    background-color: var(--danger-hover-bg);
+}

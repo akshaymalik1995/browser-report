@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Browser Usage Report</title>
+  <link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body>
+  <h1>Browser Usage Report</h1>
+
+  <div class="filters">
+    <label for="timePeriod">Time Period:</label>
+    <select id="timePeriod">
+      <option value="overall">Overall</option>
+      <option value="monthly">Monthly</option>
+      <option value="weekly">Weekly</option>
+      <option value="daily">Daily</option>
+    </select>
+
+    <label for="domainFilter">Filter by Domain:</label>
+    <input type="text" id="domainFilter" placeholder="e.g., google.com">
+  </div>
+
+  <div id="statsContainer">
+    <div id="loadingIndicator" class="loading">Loading...</div>
+    <ul id="statsList"></ul>
+  </div>
+
+  <div class="actions">
+      <button id="clearDataButton">Clear All Data</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
