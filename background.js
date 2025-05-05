@@ -63,14 +63,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       // Initialize domain entry if it doesn't exist
       if (!sites[domain]) {
         sites[domain] = {
-          visits: [],
-          count: 0
+          visits: []
         };
       }
 
-      // Add the new visit timestamp and increment count
+      // Add the new visit timestamp
       sites[domain].visits.push(timestamp);
-      sites[domain].count += 1;
 
       // Save updated site data using the debounced function
       saveSiteDataDebounced(sites);

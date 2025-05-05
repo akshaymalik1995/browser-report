@@ -61,11 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             return {
               domain,
-              count: visitsInPeriod.length
+              // Calculate count directly from the filtered visits array length
+              count: visitsInPeriod.length 
             };
           }).filter(site => site.count > 0); // Filter out sites with 0 visits in the period
 
           // --- Calculate total visits for percentage calculation --- 
+          // This calculation remains correct as it sums the derived counts
           const totalVisitsInPeriod = sitesInPeriod.reduce((sum, site) => sum + site.count, 0);
 
           // --- Apply domain filter --- 

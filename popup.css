@@ -95,13 +95,6 @@ h1 {
   border-bottom: none;
 }
 
-#statsList li:empty {
-    padding: 20px; /* More padding for empty messages */
-    text-align: center;
-    color: #777;
-    font-style: italic;
-}
-
 .actions {
     margin-top: 20px;
     text-align: center;
